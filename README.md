@@ -10,28 +10,28 @@ ConanExiles Dedicated serverを自動で建てるDockerコンテナ。
 | docker           | `19.03.8`                 |
 | docker-compose   | `1.25.4`                  |
 
-リポジトリをクローン
+リポジトリをクローン。
 ```
 git clone https://github.com/sevenspice/ConanExiles.git
 ```
 
-ディレクトリ移動
+ディレクトリ移動。
 ```
 cd ConanExiles
 ```
 
-docker-compose.ymlの作成
+docker-compose.ymlの作成。
 ```
 cp docker-compose.origin.yml docker-compose.yml
 ```
 
-docker-compose.ymlの編集
+docker-compose.ymlの編集。
 ```
 vi docker-compose.yml
 ```
 * environmentの箇所を適切に編集すること。
 
-コンテナの構築・生成・起動
+コンテナの構築・生成・起動。
 ```
 docker-compose up -d --build
 ```
@@ -41,45 +41,45 @@ docker-compose up -d --build
 コンテナ起動時に自動でゲームサーバーが起動しないように設定している。
 * 設定の変更等を起動前に手動で行う場合を想定している。
 
-コンテナにログイン
+コンテナにログイン。
 ```
 docker exec -it conan /bin/bash
 ```
 
-サーバー起動
+サーバー起動。
 ```
 /start.sh
 ```
 
-起動を確認する
+起動を確認する。
 ```
 screen -ls
 screen -r conan
 ```
 
-デタッチする
+デタッチする。
 ```
 ctl-A ctl-d
 ```
 
-ログアウト
+ログアウト。
 ```
 exit
 ```
 
 # ゲームデータの保存先
 
-ゲームサーバーデータ
+ゲームサーバーデータ。
 ```
 /conan/server/ConanSandbox/Saved
 ```
 
-キャッシュデータ
+キャッシュデータ。
 ```
 /root
 ```
 
-ボリューム
+ボリューム。
 ```
 conan_exiles
 conan_exiles-wine
@@ -90,38 +90,38 @@ conan_exiles-wine
 
 * サーバーメッセージや管理者パスワード・サーバー設定を変更した場合はこの手順で再起動すると反映される。
 
-コンテナ停止
+コンテナ停止。
 ```
 docker-compose down
 ```
 
-コンテナ起動
+コンテナ起動。
 ```
 docker-compose up -d
 ```
 
-コンテナにログイン
+コンテナにログイン。
 ```
 docker exec -it conan /bin/bash
 ```
 
-サーバー起動
+サーバー起動。
 ```
 /start.sh
 ```
 
-起動を確認する
+起動を確認する。
 ```
 screen -ls
 screen -r conan
 ```
 
-デタッチする
+デタッチする。
 ```
 ctl-A ctl-d
 ```
 
-ログアウト
+ログアウト。
 ```
 exit
 ```
@@ -131,22 +131,22 @@ exit
 * ゲームサーバーのアップデートだけならばイメージを作り直す必要はない。
 * 下記手順でゲームサーバーのアップデートは行える。
 
-コンテナにログイン
+コンテナにログイン。
 ```
 docker exec -it conan /bin/bash
 ```
 
-サーバーを停止
+サーバーを停止。
 ```
 /kill.sh
 ```
 
-アップデート
+アップデート。
 ```
 /update.sh
 ```
 
-ログアウト
+ログアウト。
 ```
 exit
 ```
@@ -156,28 +156,28 @@ exit
 * コンテナそのものに変更を加えた場合はイメージを作り直す必要がある。
 * ボリュームデータのバックアップとリストアを行わなければ以前の状態を保持できないため注意すること。
 
-ボリュームデータのバックアップ
+ボリュームデータのバックアップ。
 ```
 docker run --rm --volumes-from conan -v conan-saved:/backup busybox tar cvf /backup/backup.tar /conan/server/ConanSandbox/Saved
 docker run --rm --volumes-from conan -v conan-saved-wine:/backup busybox tar cvf /backup/backup.tar /root
 ```
 
-コンテナとボリュームの削除
+コンテナとボリュームの削除。
 ```
 docker-compose down -v
 ```
 
-イメージを削除する
+イメージを削除する。
 ```
 docker rmi conan:latest
 ```
 
-イメージの再構築からコンテナの構築・起動
+イメージの再構築からコンテナの構築・起動。
 ```
 docker-compose up -d --build
 ```
 
-ボリュームデータのリストア
+ボリュームデータのリストア。
 ```
 docker run --rm --volumes-from conan -v conan-saved:/backup busybox tar xvf /backup/backup.tar
 docker run --rm --volumes-from conan -v conan-saved-wine:/backup busybox tar xvf /backup/backup.tar
