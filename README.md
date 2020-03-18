@@ -1,6 +1,6 @@
 # 概要
 
-ConanExiles Dedicated serverを自動で建てるDockerコンテナ。
+ConanExiles Dedicated server を自動で建てる Docker コンテナ。
 
 # コンテナの構築から起動まで
 
@@ -25,11 +25,11 @@ docker-compose.ymlの作成。
 cp docker-compose.origin.yml docker-compose.yml
 ```
 
-docker-compose.ymlの編集。
+docker-compose.yml の編集。
 ```
 vi docker-compose.yml
 ```
-* environmentの箇所を適切に編集すること。
+* environment の箇所を適切に編集すること。
 
 コンテナの構築・生成・起動。
 ```
@@ -185,8 +185,8 @@ docker run --rm --volumes-from conan -v conan-saved-wine:/backup busybox tar xvf
 
 # 注意点
 
-Conan Exiles はマシンスペックを非常に要求する。Dockerのデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に、Dockerそのものの設定を変更すること。
+Conan Exiles はマシンスペックを非常に要求する。 Docker のデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に、 Docker そのものの設定を変更すること。
 
-* Dockerコンテナのディスクスペースサイズを30G以上に拡張する必要あり。
-* Dockerコンテナの使用可能メモリを8G以上に拡張する必要あり。
+* Docker コンテナのディスクスペースサイズを 30G 以上に拡張する必要あり。
+* Docker コンテナの使用可能メモリを 8G 以上に拡張する必要あり。
 * 当然だがコンテナを稼働させるホストマシンは上記ディスクスペースサイズ・メモリ容量以上のディスク空き容量・メモリ容量が必要である。
