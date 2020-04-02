@@ -67,6 +67,12 @@ ctl-A ctl-d
 exit
 ```
 
+## コンテナにログインせずに起動する
+
+```
+docker exec -it conan sh -c "exec >/dev/tty 2>/dev/tty </dev/tty && /start.sh"
+```
+
 # ゲームデータの保存先
 
 ゲームサーバーデータ。
