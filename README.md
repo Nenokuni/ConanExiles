@@ -209,6 +209,25 @@ docker run --rm --volumes-from conan -v conan-saved:/backup busybox tar xvf /bac
 docker run --rm --volumes-from conan -v conan-saved-wine:/backup busybox tar xvf /backup/backup.tar
 ```
 
+# キャラクターデータはそのままで初期化する
+
+マップが無茶苦茶になったりした場合に有効。キャラクターデータのみ保持で他すべて初期化される。
+
+コンテナにログインする。
+```
+docker exec -it conan /bin/bash
+```
+
+ディレクトリを移動する。
+```
+cd /conan/server/ConanSandbox/Saved
+```
+
+// 初期化する。
+```
+wine start.exe Z:\\conan\\server\\ConanSandbox\\Saved\\ServerCleanup.bat
+```
+
 # 注意点
 
 Conan Exiles はマシンスペックを非常に要求する。 Doker for Windows あるいは Docker for Mac のデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に設定を変更すること。
