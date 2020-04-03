@@ -27,6 +27,6 @@ services:
       - RCON_PASSWORD=パスワード
       - SERVER_MESSAGE=サーバー参加時に表示されるメッセージ
     mem_limit: 8g
-    command: bash -c '/entrypoint.sh && /bin/bash'
+    command: bash -c '/entrypoint.sh && /start.sh && /bin/bash'
     restart: 'unless-stopped'
     tty: true
