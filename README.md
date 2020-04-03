@@ -223,7 +223,7 @@ docker exec -it conan /bin/bash
 cd /conan/server/ConanSandbox/Saved
 ```
 
-// 初期化する。
+初期化する。
 ```
 wine start.exe Z:\\conan\\server\\ConanSandbox\\Saved\\ServerCleanup.bat
 ```
