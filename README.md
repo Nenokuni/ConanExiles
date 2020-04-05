@@ -86,6 +86,12 @@ exit
 docker exec -it conan sh -c "exec >/dev/tty 2>/dev/tty </dev/tty && /start.sh"
 ```
 
+## コンテナにログインせずにログをtailする
+
+```
+docker exec -it conan sh -c "tail -f /conan/server/ConanSandbox/Saved/Logs/ConanSandbox.log"
+```
+
 # ゲームデータの保存先
 
 ゲームサーバーデータ。
