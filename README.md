@@ -234,6 +234,31 @@ cd /conan/server/ConanSandbox/Saved
 wine start.exe Z:\\conan\\server\\ConanSandbox\\Saved\\ServerCleanup.bat
 ```
 
+# RCONを使ったブロードキャストメッセージの送信
+
+サーバー内でプレイ中のプレイヤーにメッセージを伝える方法を紹介する。
+
+RCONをダウンロードする。
+```
+wget https://github.com/Tiiffi/mcrcon/releases/download/v0.7.1/mcrcon-0.7.1-linux-x86-64.tar.gz
+```
+
+解凍する。
+```
+tar xvfz https://github.com/Tiiffi/mcrcon/releases/download/v0.7.1/mcrcon-0.7.1-linux-x86-64.tar.gz
+```
+
+ディレクトリを移動する。
+```
+cd mcrcon-0.7.1-linux-x86-64
+```
+
+ブロードキャストメッセージの送信。
+```
+./mcrcon -H localhost -P 25575 -p <設定したRCONのパスワード> -s "broadcast <送信したいメッセージ>"
+```
+* サーバー内でプレイしていると画面にメッセージボックスが表示されるはずである。
+
 # 注意点
 
 Conan Exiles はマシンスペックを非常に要求する。 Doker for Windows あるいは Docker for Mac のデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に設定を変更すること。
