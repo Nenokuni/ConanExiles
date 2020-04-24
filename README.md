@@ -122,7 +122,7 @@ docker-compose down
 
 コンテナ起動。
 ```
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 コンテナにログイン。
