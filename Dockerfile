@@ -72,4 +72,4 @@ COPY kill.sh /kill.sh
 RUN chmod 755 /kill.sh
 RUN chown root:root /kill.sh
 
-EXPOSE 7777/udp 27015/udp 25575/tcp
+EXPOSE 7777/udp 7778/udp 27015/udp 25575/tcp
