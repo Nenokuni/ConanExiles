@@ -1,6 +1,6 @@
 # 概要
 
-ConanExiles Dedicated server を自動で建てる Docker コンテナ。
+ConanExiles Dedicated serverを自動で建てるDockerコンテナ。
 
 # コンテナの構築から起動まで
 
@@ -261,8 +261,8 @@ cd mcrcon-0.7.1-linux-x86-64
 
 # 注意点
 
-Conan Exiles はマシンスペックを非常に要求する。 Doker for Windows あるいは Docker for Mac のデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に設定を変更すること。
+Conan Exilesはマシンスペックを非常に要求する。Doker for WindowsあるいはDocker for Macのデフォルト設定だとゲームサーバーの起動は失敗するため以下の様に設定を変更すること。
 
-* Docker コンテナのディスクスペースサイズを 30G 以上に拡張する必要あり。
-* Docker コンテナの使用可能メモリを 8G 以上に拡張する必要あり。
+* Docker コンテナのディスクスペースサイズを30G以上に拡張する必要あり。
+* Docker コンテナの使用可能メモリを8G以上に拡張する必要あり。
 * 当然だがコンテナを稼働させるホストマシンは上記ディスクスペースサイズ・メモリ容量以上のディスク空き容量・メモリ容量が必要である。
