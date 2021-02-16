@@ -25,7 +25,7 @@ docker-compose.ymlの作成。
 cp docker-compose.origin.yml docker-compose.yml
 ```
 
-docker-compose.yml の編集。
+docker-compose.ymlの編集。
 ```
 vi docker-compose.yml
 ```
