@@ -1,12 +1,19 @@
 FROM debian:buster-slim
 
+ENV USER_HOME /home/conan
 ENV INSTALL_DIR /conan
 ENV STEAM_CMD_DIR $INSTALL_DIR/steamcmd
+ENV LC_ALL ja_JP.UTF-8
 
-RUN mkdir /conan
-RUN chmod 775 /conan
-RUN chown root:root /conan
+ARG user=conan
+ARG group=conan
+ARG uid=33333
+ARG gid=33333
+RUN mkdir -p $(dirname $USER_HOME) \
+    && groupadd -g ${gid} ${group} \
+    && useradd -d "$USER_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
+RUN mkdir -p $INSTALL_DIR
 RUN set -x \
     && dpkg --add-architecture i386 \
     && apt-get update \
@@ -27,7 +34,7 @@ RUN set -x \
         lib32stdc++6=8.3.0-6 \
         lib32gcc1=1:8.3.0-6 \
         wget=1.20.1-1.1 \
-        ca-certificates=20190110 \
+        ca-certificates \
     && echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen ja_JP.UTF-8 \
     && dpkg-reconfigure locales \
@@ -42,34 +49,40 @@ RUN set -x \
     && apt-get clean autoclean \
     && apt-get autoremove -y
 
-ENV LC_ALL ja_JP.UTF-8
 WORKDIR $INSTALL_DIR
+
 RUN mkdir server
-RUN chmod 775 server
-RUN chown root:root server
 RUN $STEAM_CMD_DIR/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir $INSTALL_DIR/server +login anonymous +app_update 443030 validate +exit
+RUN chown -R ${user}:${user} $INSTALL_DIR
 
 COPY Saved/Config/WindowsServer/Engine.ini /tmp/Engine.ini
 COPY Saved/Config/WindowsServer/Game.ini /tmp/Game.ini
 COPY Saved/Config/WindowsServer/ServerSettings.ini /tmp/ServerSettings.ini
+RUN chown ${user}:${user} /tmp/Engine.ini
+RUN chown ${user}:${user} /tmp/Game.ini
+RUN chown ${user}:${user} /tmp/ServerSettings.ini
 
 COPY Saved/Config $INSTALL_DIR/server/ConanSandbox/Saved/Config
 COPY Saved/blacklist.txt $INSTALL_DIR/server/ConanSandbox/Saved/blacklist.txt
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
-RUN chown root:root /entrypoint.sh
+RUN chown ${user}:${user} /entrypoint.sh
 
 COPY start.sh /start.sh
 RUN chmod 755 /start.sh
-RUN chown root:root /start.sh
+RUN chown ${user}:${user} /start.sh
 
 COPY update.sh /update.sh
 RUN chmod 755 /update.sh
-RUN chown root:root /update.sh
+RUN chown ${user}:${user} /update.sh
 
 COPY kill.sh /kill.sh
 RUN chmod 755 /kill.sh
-RUN chown root:root /kill.sh
+RUN chown ${user}:${user} /kill.sh
 
+RUN chown -R ${user}:${user} $INSTALL_DIR/server/ConanSandbox/Saved
+RUN chown ${user}:${user} $INSTALL_DIR/server/ConanSandbox/Saved/blacklist.txt
+
+USER ${user}
 EXPOSE 7777/udp 7778/udp 27015/udp 25575/tcp

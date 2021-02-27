@@ -21,7 +21,7 @@ services:
       - 25575:25575/tcp
     volumes:
       - 'exiles:/conan/server/ConanSandbox/Saved'
-      - 'exiles-wine:/root'
+      - 'exiles-wine:/home/conan'
     environment:
       - SERVER_NAME=サーバー名
       - ADMIN_PASSWORD=パスワード
